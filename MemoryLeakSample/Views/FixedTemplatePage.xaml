@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:local="clr-namespace:MemoryLeakSample"
+             x:Class="MemoryLeakSample.FixedTemplatePage"
+             Title="Fixed: ItemTemplate cleanup">
+    <Grid RowDefinitions="Auto,*" 
+          Padding="10">
+        <Frame BackgroundColor="#DFF6DD" 
+               Padding="10" 
+               Margin="0,0,0,10">
+            <Label Text="Item view detaches from old BindingContext and attaches to new BindingContext to avoid leaks during recycling." 
+                   TextColor="#0F6A00" 
+                   FontSize="13"/>
+        </Frame>
+        <sfListView:SfListView x:Name="listView" 
+                               Grid.Row="1" 
+                               ItemSize="70">
+            <sfListView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <local:FixedItemView/>
+                </DataTemplate>
+            </sfListView:SfListView.ItemTemplate>
+        </sfListView:SfListView>
+    </Grid>
+</ContentPage>

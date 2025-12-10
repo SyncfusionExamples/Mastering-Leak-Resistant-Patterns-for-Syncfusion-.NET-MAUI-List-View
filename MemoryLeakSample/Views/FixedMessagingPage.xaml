@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="MemoryLeakSample.FixedMessagingPage"
+             Title="Fixed: Messaging &amp; Timers">
+    <Grid RowDefinitions="Auto,Auto,*" 
+          Padding="10">
+        <Frame BackgroundColor="#DFF6DD" 
+               Padding="10" 
+               Margin="0,0,0,10">
+            <Label Text="MessagingCenter is unsubscribed and timers/tasks are cancelled in OnDisappearing." 
+                   TextColor="#0F6A00" 
+                   FontSize="13"/>
+        </Frame>
+        <HorizontalStackLayout Grid.Row="1" 
+                               Spacing="10">
+            <Label x:Name="TimerLabel" 
+                   Text="Timer: 0" 
+                   FontAttributes="Bold"/>
+            <Button Text="Send Message" 
+                    Clicked="OnSendMessage"/>
+        </HorizontalStackLayout>
+        <sfListView:SfListView x:Name="listView" 
+                               Grid.Row="2" 
+                               ItemSize="70">
+            <sfListView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" 
+                          ColumnDefinitions="*,Auto" 
+                          RowDefinitions="Auto,Auto">
+                        <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                        <Label Grid.Row="1" Text="{Binding Email}" FontSize="12" TextColor="Gray"/>
+                        <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding IsActive, StringFormat='Active: {0}'}"/>
+                    </Grid>
+                </DataTemplate>
+            </sfListView:SfListView.ItemTemplate>
+        </sfListView:SfListView>
+    </Grid>
+</ContentPage>
