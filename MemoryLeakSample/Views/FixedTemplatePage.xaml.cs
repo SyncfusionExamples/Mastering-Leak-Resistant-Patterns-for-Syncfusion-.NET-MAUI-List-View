@@ -31,8 +31,7 @@ public partial class FixedTemplatePage : ContentPage
 }
 
 /// <summary>
-/// Lightweight item view that subscribes/unsubscribes to BindingContext changes
-/// and updates UI efficiently without leaking event handlers.
+/// Lightweight item view that subscribes/unsubscribes to BindingContext changes and updates UI efficiently without leaking event handlers.
 /// </summary>
 public class FixedItemView : ContentView
 {
@@ -81,14 +80,16 @@ public class FixedItemView : ContentView
     /// </summary>
     protected override void OnBindingContextChanged()
     {
-        if (_oldContext is INotifyPropertyChanged oldCtx)
-            oldCtx.PropertyChanged -= OnItemPropertyChanged;
+        if (_oldContext is INotifyPropertyChanged oldContext)
+        {
+            oldContext.PropertyChanged -= OnItemPropertyChanged;
+        }
 
         base.OnBindingContextChanged();
 
-        if (BindingContext is INotifyPropertyChanged newCtx)
+        if (BindingContext is INotifyPropertyChanged newContext)
         {
-            newCtx.PropertyChanged += OnItemPropertyChanged;
+            newContext.PropertyChanged += OnItemPropertyChanged;
             UpdateView(BindingContext as Person);
         }
 
@@ -101,24 +102,13 @@ public class FixedItemView : ContentView
     protected override void OnHandlerChanged()
     {
         // When the native handler is removed (view disposed), ensure cleanup
-        if (Handler == null && _oldContext is INotifyPropertyChanged oldCtx)
+        if (Handler == null && _oldContext is INotifyPropertyChanged oldContext)
         {
-            oldCtx.PropertyChanged -= OnItemPropertyChanged;
+            oldContext.PropertyChanged -= OnItemPropertyChanged;
             _oldContext = null;
         }
 
         base.OnHandlerChanged();
-    }
-
-    /// <summary>
-    /// Defensive finalizer for development to ensure no lingering subscription remains.
-    /// </summary>
-    ~FixedItemView()
-    {
-        if (_oldContext is INotifyPropertyChanged oldCtx)
-        {
-            try { oldCtx.PropertyChanged -= OnItemPropertyChanged; } catch { }
-        }
     }
 
     /// <summary>
@@ -127,19 +117,24 @@ public class FixedItemView : ContentView
     private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (BindingContext is Person person)
+        {
             UpdateView(person);
+        }
     }
 
     /// <summary>
     /// Applies the bound values to the UI.
     /// </summary>
-    private void UpdateView(Person? p)
+    private void UpdateView(Person? person)
     {
-        if (p == null) return;
+        if (person == null)
+        {
+            return;
+        }
 
-        _name.Text = p.Name;
-        _email.Text = p.Email;
-        _status.Text = p.IsActive ? "Active" : "Inactive";
-        _status.TextColor = p.IsActive ? Colors.Green : Colors.Red;
+        _name.Text = person.Name;
+        _email.Text = person.Email;
+        _status.Text = person.IsActive ? "Active" : "Inactive";
+        _status.TextColor = person.IsActive ? Colors.Green : Colors.Red;
     }
 }

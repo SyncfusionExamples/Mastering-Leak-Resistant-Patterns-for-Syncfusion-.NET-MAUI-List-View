@@ -14,7 +14,7 @@ namespace MemoryLeakSample
         }
 
         /// <summary>
-        /// Opens the Events cleanup sample.
+        /// Opens the Events cleanup page.
         /// </summary>
         private void OpenFixedEvents(object sender, EventArgs e)
         {
@@ -22,7 +22,7 @@ namespace MemoryLeakSample
         }
 
         /// <summary>
-        /// Opens the ItemTemplate cleanup sample.
+        /// Opens the ItemTemplate cleanup page.
         /// </summary>
         private void OpenFixedTemplate(object sender, EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace MemoryLeakSample
         }
 
         /// <summary>
-        /// Opens the Messaging and timers sample (CTS-based).
+        /// Opens the Messaging and timers page.
         /// </summary>
         private void OpenFixedMessaging(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace MemoryLeakSample
         }
 
         /// <summary>
-        /// Opens the combined best‑practices sample.
+        /// Opens the combined best‑practices page.
         /// </summary>
         private void OpenBestPractices(object sender, EventArgs e)
         {

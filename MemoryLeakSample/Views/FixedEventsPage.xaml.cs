@@ -30,9 +30,11 @@ public partial class FixedEventsPage : ContentPage
         // Populate fresh data and bind only while visible
         _items = new ObservableCollection<Person>();
         for (int i = 1; i <= 100; i++)
+        {
             _items.Add(new Person { Name = $"Person {i}", Email = $"person{i}@example.com", IsActive = i % 2 == 0 });
-        listView.ItemsSource = _items;
+        }
 
+        listView.ItemsSource = _items;
         listView.ItemTapped += OnItemTapped;
         listView.SelectionChanged += OnSelectionChanged;
     }
@@ -59,8 +61,10 @@ public partial class FixedEventsPage : ContentPage
     /// </summary>
     private void OnItemTapped(object? sender, SfItemTappedEventArgs e)
     {
-        if (e.DataItem is Person p)
-            Console.WriteLine($"Tapped: {p.Name}");
+        if (e.DataItem is Person person)
+        {
+            Console.WriteLine($"Tapped: {person.Name}");
+        }
     }
 
     /// <summary>
@@ -69,7 +73,9 @@ public partial class FixedEventsPage : ContentPage
     /// </summary>
     private void OnSelectionChanged(object? sender, SfItemSelectionChangedEventArgs e)
     {
-        if (e.AddedItems.Count > 0 && e.AddedItems[0] is Person p)
-            Console.WriteLine($"Selected: {p.Name}");
+        if (e.AddedItems.Count > 0 && e.AddedItems[0] is Person person)
+        {
+            Console.WriteLine($"Selected: {person.Name}");
+        }
     }
 }

@@ -31,7 +31,10 @@ public partial class FixedMessagingPage : ContentPage
 
         _items = new ObservableCollection<Person>();
         for (int i = 1; i <= 50; i++)
+        {
             _items.Add(new Person { Name = $"Person {i}", Email = $"person{i}@example.com", IsActive = i % 3 == 0 });
+        }
+
         listView.ItemsSource = _items;
 
         _timerCts = new CancellationTokenSource();

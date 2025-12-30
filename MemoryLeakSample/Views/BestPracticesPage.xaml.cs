@@ -35,9 +35,11 @@ public partial class BestPracticesPage : ContentPage
         // Create data and bind only while visible
         _items = new ObservableCollection<Person>();
         for (int i = 1; i <= 100; i++)
+        {
             _items.Add(new Person { Name = $"Person {i}", Email = $"person{i}@example.com", IsActive = i % 2 == 0 });
-        listView.ItemsSource = _items;
+        }
 
+        listView.ItemsSource = _items;
         listView.ItemTapped += OnItemTapped;
         listView.SelectionChanged += OnSelectionChanged;
 
@@ -88,8 +90,10 @@ public partial class BestPracticesPage : ContentPage
     /// </summary>
     private async void OnItemTapped(object? sender, SfItemTappedEventArgs e)
     {
-        if (e.DataItem is Person p)
-            await DisplayAlertAsync("Tapped", p.Name, "OK");
+        if (e.DataItem is Person person)
+        {
+            await DisplayAlertAsync("Tapped", person.Name, "OK");
+        }
     }
 
     /// <summary>
@@ -97,8 +101,10 @@ public partial class BestPracticesPage : ContentPage
     /// </summary>
     private void OnSelectionChanged(object? sender, SfItemSelectionChangedEventArgs e)
     {
-        if (e.AddedItems.Count > 0 && e.AddedItems[0] is Person p)
-            Console.WriteLine($"Selected: {p.Name}");
+        if (e.AddedItems.Count > 0 && e.AddedItems[0] is Person person)
+        {
+            Console.WriteLine($"Selected: {person.Name}");
+        }
     }
 }
 
@@ -138,14 +144,16 @@ public partial class BestPracticeItemView : ContentView
         // Stop any running item animation before rebind
         this.AbortAnimation("ItemAnimation");
 
-        if (_oldContext is INotifyPropertyChanged oldCtx)
-            oldCtx.PropertyChanged -= OnItemPropertyChanged;
+        if (_oldContext is INotifyPropertyChanged oldContext)
+        {
+            oldContext.PropertyChanged -= OnItemPropertyChanged;
+        }
 
         base.OnBindingContextChanged();
 
-        if (BindingContext is INotifyPropertyChanged newCtx)
+        if (BindingContext is INotifyPropertyChanged newContext)
         {
-            newCtx.PropertyChanged += OnItemPropertyChanged;
+            newContext.PropertyChanged += OnItemPropertyChanged;
             UpdateView(BindingContext as Person);
         }
         _oldContext = BindingContext;
@@ -157,9 +165,9 @@ public partial class BestPracticeItemView : ContentView
     protected override void OnHandlerChanged()
     {
         // When the native view is detached, finalize cleanup
-        if (Handler == null && _oldContext is INotifyPropertyChanged oldCtx)
+        if (Handler == null && _oldContext is INotifyPropertyChanged oldContext)
         {
-            oldCtx.PropertyChanged -= OnItemPropertyChanged;
+            oldContext.PropertyChanged -= OnItemPropertyChanged;
             _oldContext = null;
         }
         base.OnHandlerChanged();
@@ -170,9 +178,9 @@ public partial class BestPracticeItemView : ContentView
     /// </summary>
     ~BestPracticeItemView()
     {
-        if (_oldContext is INotifyPropertyChanged oldCtx)
+        if (_oldContext is INotifyPropertyChanged oldContext)
         {
-            try { oldCtx.PropertyChanged -= OnItemPropertyChanged; } catch { }
+            try { oldContext.PropertyChanged -= OnItemPropertyChanged; } catch { }
         }
     }
 
@@ -181,20 +189,26 @@ public partial class BestPracticeItemView : ContentView
     /// </summary>
     private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (BindingContext is Person p)
-            UpdateView(p);
+        if (BindingContext is Person person)
+        {
+            UpdateView(person);
+        }
     }
 
     /// <summary>
     /// Applies the data to the UI.
     /// </summary>
-    private void UpdateView(Person? p)
+    private void UpdateView(Person? person)
     {
-        if (p == null) return;
-        _name.Text = p.Name;
-        _email.Text = p.Email;
-        _status.Text = p.IsActive ? "Active" : "Inactive";
-        _status.TextColor = p.IsActive ? Colors.Green : Colors.Red;
+        if (person == null)
+        {
+            return;
+        }
+
+        _name.Text = person.Name;
+        _email.Text = person.Email;
+        _status.Text = person.IsActive ? "Active" : "Inactive";
+        _status.TextColor = person.IsActive ? Colors.Green : Colors.Red;
     }
 
 }
