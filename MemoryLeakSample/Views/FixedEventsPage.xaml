@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:Class="MemoryLeakSample.FixedEventsPage"
              Title="Fixed: Events cleanup">
     <Grid RowDefinitions="Auto,*" Padding="10">
         <Frame BackgroundColor="#DFF6DD" Padding="10" Margin="0,0,0,10">
             <Label Text="Events are subscribed in OnAppearing and unsubscribed in OnDisappearing to prevent leaks." TextColor="#0F6A00" FontSize="13"/>
         </Frame>
-        <sfListView:SfListView x:Name="listView" Grid.Row="1" ItemSize="70" SelectionMode="Single">
-            <sfListView:SfListView.ItemTemplate>
+        <listView:SfListView x:Name="listView" Grid.Row="1" ItemSize="70" SelectionMode="Single">
+            <listView:SfListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                         <Label Text="{Binding Name}" FontAttributes="Bold"/>
@@ -17,7 +17,7 @@
                         <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding IsActive, StringFormat='Active: {0}'}"/>
                     </Grid>
                 </DataTemplate>
-            </sfListView:SfListView.ItemTemplate>
-        </sfListView:SfListView>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
     </Grid>
 </ContentPage>

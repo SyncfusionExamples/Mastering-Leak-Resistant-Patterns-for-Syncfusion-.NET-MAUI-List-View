@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:Class="MemoryLeakSample.FixedMessagingPage"
              Title="Fixed: Messaging &amp; Timers">
     <Grid RowDefinitions="Auto,Auto,*" 
@@ -21,10 +21,10 @@
             <Button Text="Send Message" 
                     Clicked="OnSendMessage"/>
         </HorizontalStackLayout>
-        <sfListView:SfListView x:Name="listView" 
+        <listView:SfListView x:Name="listView" 
                                Grid.Row="2" 
                                ItemSize="70">
-            <sfListView:SfListView.ItemTemplate>
+            <listView:SfListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10" 
                           ColumnDefinitions="*,Auto" 
@@ -34,7 +34,7 @@
                         <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding IsActive, StringFormat='Active: {0}'}"/>
                     </Grid>
                 </DataTemplate>
-            </sfListView:SfListView.ItemTemplate>
-        </sfListView:SfListView>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
     </Grid>
 </ContentPage>
