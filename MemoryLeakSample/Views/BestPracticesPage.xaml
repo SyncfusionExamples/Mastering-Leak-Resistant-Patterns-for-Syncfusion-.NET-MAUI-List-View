@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:local="clr-namespace:MemoryLeakSample"
+             x:Class="MemoryLeakSample.BestPracticesPage"
+             Title="Best Practices">
+    <Grid RowDefinitions="Auto,*" Padding="10">
+        <Frame BackgroundColor="#D6EAF8" Padding="10" Margin="0,0,0,10">
+            <Label Text="Applies leak‑prevention patterns: event unsubscribe, template cleanup, timer cancellation, image cleanup, stopping animations, and clearing ItemsSource when appropriate." 
+                   TextColor="#0B3C5D" FontSize="13"/>
+        </Frame>
+        <listView:SfListView x:Name="listView"
+                               Grid.Row="1"
+                               ItemSize="80"
+                               SelectionMode="Single">
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <local:BestPracticeItemView />
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
+    </Grid>
+</ContentPage>
